@@ -1,0 +1,77 @@
+version: '3.3'
+services:
+
+  configuration-service:
+    build:
+      context: configuration-service/
+      dockerfile: Dockerfile
+    container_name: configuration-service
+    ports:
+      - "8081:8081"
+    networks:
+      - base-network
+
+  discovery-service:
+    build:
+      context: discovery-service/
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    entrypoint: /opt/start-discovery-service.sh
+    ports:
+      - "8082:8082"
+    networks:
+      - base-network
+    depends_on:
+      - configuration-service
+
+  access-service:
+    build:
+      context: access-service/
+      dockerfile: Dockerfile
+    container_name: access-service
+    entrypoint: /opt/start-access-service.sh
+    ports:
+      - "8085:8085"
+    networks:
+      - base-network
+    depends_on:
+      - discovery-service
+      - mongodb
+
+  communication-service:
+    build:
+      context: communication-service/
+      dockerfile: Dockerfile
+    container_name: communication-service
+    entrypoint: /opt/start-communication-service.sh
+    ports:
+      - "8084:8084"
+    networks:
+      - base-network
+    depends_on:
+      - discovery-service
+      - mongodb
+
+  gateway-service:
+    build:
+      context: gateway-service/
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    entrypoint: /opt/start-gateway-service.sh
+    ports:
+      - "8080:8080"
+    networks:
+      - base-network
+    depends_on:
+      - access-service
+      - communication-service
+      
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    networks:
+      - base-network
+
+networks:
+  base-network:
+    driver: bridge   
