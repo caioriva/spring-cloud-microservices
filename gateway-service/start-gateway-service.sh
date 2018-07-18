@@ -16,4 +16,4 @@ while ! nc -z access-service 8085 ; do
 
 done
 
-java -jar /opt/gateway-service.jar
+java -jar -Dspring.profiles.active=production /opt/gateway-service.jar

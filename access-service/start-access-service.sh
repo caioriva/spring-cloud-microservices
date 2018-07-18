@@ -8,4 +8,4 @@ while ! nc -z discovery-service 8082 ; do
 
 done
 
-java -jar /opt/access-service.jar
+java -jar -Dspring.profiles.active=production /opt/access-service.jar

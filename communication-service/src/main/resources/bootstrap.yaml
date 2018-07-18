@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: communication-service
+  cloud:
+    config:
+      uri: http://localhost:8081
+
+---
+spring:
+  profiles: production
+  cloud:
+    config:
+      uri: http://configuration-service:8081

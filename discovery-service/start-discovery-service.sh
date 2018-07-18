@@ -2,7 +2,7 @@
 
 while ! nc -z configuration-service 8081 ; do
 
-    echo "discovery-service is waiting for the configurantion-service"
+    echo "discovery-service is waiting for the configuration-service"
 
     sleep 3
 
@@ -10,4 +10,4 @@ done
 
 sleep 10
 
-java -jar /opt/discovery-service.jar
+java -jar -Dspring.profiles.active=production /opt/discovery-service.jar
