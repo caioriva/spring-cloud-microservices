@@ -7,19 +7,19 @@ This is an example project for Testing Spring Cloud Netflix framework and micros
 
 ###### POST: http://localhost:8080/access/users
 {
-  "name": "",
-  "password": ""
+  "name": "",\
+  "password": ""\
 }
 
 ###### POST: http://localhost:8080/communication/rooms
 {
-  "name": "",
-  "ownerUserId": "",
+  "name": "",\
+  "ownerUserId": "",\
   "guestUsersId": \["", ""]\
 }
 
 ###### POST: http://localhost:8080/communication/messages
 {
-  "text": "",
-  "senderParticipantId": ""
+  "text": "",\
+  "senderParticipantId": ""\
 }
